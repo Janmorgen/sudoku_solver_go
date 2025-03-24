@@ -41,13 +41,14 @@ func find_missing(board [9][9]int, pos [2]int) []int {
   for i := range 9 {
     v_num := board[pos[0]][i]
     h_num := board[i][pos[1]]
-    if v_num != 0{
+    if v_num != 0 {
       possible_numbers= remove_value(possible_numbers,v_num)
     } 
-    if h_num != 0{
+    if h_num != 0 {
       possible_numbers= remove_value(possible_numbers,h_num)
     }
   }
+
 
   // Check the 3x3 grid of the position and remove numbers which already exist from possible_numbers
   for _,i := range possible_numbers{
@@ -58,6 +59,12 @@ func find_missing(board [9][9]int, pos [2]int) []int {
   return possible_numbers
   
 }
+// func ensure_board_valid_choice(board [9][9]int, pos [2]int, potential_option int ) {
+//   for i := range 9 {
+//     if board[]
+//
+//   }
+// }
 
 // Deprecated function -- Replaced by find_missing
 // Checks if the given number is valid in a specific board position
@@ -162,12 +169,12 @@ func print_board(board [9][9]int, highlights ...[2]int) {
 }
 
 // The number passed to this function determines how many tiles get revealed
-func create_sudoku_board(difficultiy int) [9][9]int {
+func create_sudoku_board(difficulty int) [9][9]int {
   // Define the board
 	var board = [9][9]int{}
 
 
-	for i := 0; i < difficultiy; i++ {
+	for i := 0; i < difficulty; i++ {
 		var x = rand.Intn(9)
 		var y = rand.Intn(9)
 		insert_pos := []int{x, y}
@@ -176,8 +183,19 @@ func create_sudoku_board(difficultiy int) [9][9]int {
     options := find_missing(board, [2]int(insert_pos)) 
 
     // Ensure that empty options do not affect the choice of difficulty
-    if len(options)!=0{
+    if len(options) > 1 {
+      for (x_val:=0;x_val<9;x_val++){
+        if (x_val == x ){
+          continue
+        }
+        check_pos := []int{x, y};
+        options := find_missing(board, check_pos)
+        if options
+
+
+      }
       var number = options[rand.Intn(len(options))]
+      
       board[x][y] = number
     }else{
       i --
